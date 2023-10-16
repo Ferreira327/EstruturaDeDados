@@ -1,0 +1,104 @@
+#include <iostream>
+
+using namespace std;
+
+class noh{
+
+    friend class Fila;
+
+private:
+    int mValor;
+    noh* proximo;
+
+public:
+    noh(int valor);
+
+};
+
+noh::noh(int valor){
+    mValor = valor;
+    proximo = NULL;
+}
+
+class Fila{
+private:
+    noh* primeiro;
+    noh* ultimo;
+public:
+    Fila();
+    ~Fila();
+    int desenfileirar();
+    void enfileirar(int valor);
+    bool vazio();
+    void desenfileirar_tudo();
+};
+
+Fila::Fila(){
+    primeiro = NULL;
+    ultimo = NULL;
+}
+
+Fila::~Fila(){
+    while(!vazio()){
+        desenfileirar();
+    }
+}
+
+bool Fila::vazio(){
+    if(primeiro == NULL || ultimo == NULL){
+        return 1;
+    }
+    else
+        return 0;
+}
+
+int Fila::desenfileirar(){
+    if(!vazio()){
+    int guardar = primeiro->mValor;
+    noh* temp = primeiro;
+    primeiro = primeiro->proximo;
+    delete temp;
+    return guardar;}
+    else
+        cout << "\nFila Vazia\n";
+}
+
+void Fila::enfileirar(int valor){
+    noh* novo = new noh(valor);
+    if(vazio()){
+        primeiro = novo;
+    }
+    else{
+        ultimo->proximo = novo;
+    }
+    ultimo = novo;
+}
+
+void Fila :: desenfileirar_tudo(){
+    while(!vazio())
+        cout << desenfileirar() << endl;
+}
+
+int main(){
+
+    Fila indiana;
+    int valor;
+    char escolha = '4';
+
+    while(escolha != '0'){
+        system("pause");
+        system("cls");
+        cout << "[1]Enfilheirar\n[2]Desenfileirar\n[3]Desenfileirar Tudo\n";
+        cin >> escolha;
+        if(escolha == '1'){
+            cin >> valor;
+            indiana.enfileirar(valor);}
+        else if(escolha == '2')
+            cout << indiana.desenfileirar();
+        else if(escolha == '3')
+            indiana.desenfileirar_tudo();
+    }     
+
+
+    return 0;
+}
