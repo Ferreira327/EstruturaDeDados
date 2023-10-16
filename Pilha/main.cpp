@@ -85,7 +85,7 @@ int main(){
 
     while(escolha != 5){
         system("pause");
-        cout << "[1]Empilhar\n[2]Desempilhar\n[3]Ver o Topo\n[4]Desempilhar Tudo\n";
+        cout << "[1]Empilhar\n[2]Desempilhar\n[3]Ver Topo\n[4]Desempilhar Tudo\n";
         cin >> escolha;
         system("cls");
         if(escolha == 1){
